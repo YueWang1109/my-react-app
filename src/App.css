@@ -1,0 +1,23 @@
+
+
+.navbar-right { margin-right: 0px !important}
+.log {
+  margin: 5px 10px 0 0;
+}
+.button {
+  background-color: #999;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.redbtn{
+  background-color: rgb(160, 49, 49);
+}
+.greenbtn{
+  background-color: rgb(37, 153, 76);
+}

@@ -1,0 +1,72 @@
+.profile-container{
+    font-family: Impact, Charcoal, sans-serif;
+    width: 100%;
+    text-align: center;
+}
+.profile-body{
+    width: 50%;
+    font-size: 20px;
+    display: inline-block;
+}
+.profile-row{
+    width: 100%;
+    display: inline-block;
+    margin: 10px;
+}
+.profile-title{
+    float: left;
+}
+.profile-content{
+    float: right;
+    width: 50%;
+    text-align: left;
+    padding-left: 10px;
+}
+.warning {
+    color:red;
+    font-size: 20px;
+    }
+.button{
+    margin-top: 5px;
+}
+.defbtn{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.my-pic{
+    background-image: url("https://hmsnews.org/wp-content/uploads/2017/03/sports.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    align-content: center;
+    width: 100%;
+    height: 500px;
+}
+.my-title{
+    text-align: center;
+    padding: 20px;
+}
+.my-about{
+    background-image: url("http://thenationonlineng.net/wp-content/uploads/2017/11/sports-1.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    align-content: center;
+    width: 100%;
+    height: 500px;
+}
+.form-container{
+    text-align: center;
+    display: block;
+}
+.my-form{
+    width: 500px;
+    display: inline-block;
+    text-align: left;
+}
+@media (max-width: 700px){/*below 700px */
+    .my-form{
+        width: 90%;
+    }
+}
+.my-nav{
+    font-family: Impact, Charcoal, sans-serif;
+}
