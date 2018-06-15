@@ -52,8 +52,10 @@ class Login extends Component {
         //this.setState({isAuthenticated: true});
         if(data&&data.loggedin){
           console.log(data);
-          localStorage.setItem('authed', data.type);
+          localStorage.setItem('uid', data.uid);
+          localStorage.setItem('authed', data.role);
           localStorage.setItem('useremail', data.email);
+          localStorage.setItem('refreshtoken', data.reftkn);
           let token = data.token;
           debugger;
           if (token) {
@@ -133,7 +135,7 @@ class Login extends Component {
         <React.Fragment>
         <Nav />
         <div className="form-container">
-          <h2>Customer Login</h2>
+          <h2>User Login</h2>
           <div className="warning">
             { this.state.warning? this.state.wariningMsg : null }
           </div>

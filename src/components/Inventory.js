@@ -25,6 +25,7 @@ class Inventory extends Component {
         this.setState({ isLoading: true });
         getInventoryData(sortby).then((rcvdata) => {
             debugger;
+            if(rcvdata)
             this.setState({
                 games: rcvdata,
                 authed: localStorage.getItem('authed'),
@@ -44,9 +45,6 @@ class Inventory extends Component {
                     errmsg: error.response.statusText
                 })
             }
-
-            if(error)
-                throw error;
         });
     }
     componentDidMount(){

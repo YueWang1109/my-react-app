@@ -7,7 +7,7 @@ class Mynav extends Component {
   constructor(props){
     super(props);
     this.state = {
-      authed: null
+      authed: 'false'
     }
   }
   handleLogout(){
@@ -15,10 +15,10 @@ class Mynav extends Component {
     localStorage.clear();
   }
   componentWillReceiveProps(){
-    //debugger;
-    if(this.props.authed === false){
+    debugger;
+    if(this.props.authed === 'false'){
       this.handleLogout();
-      this.setState({authed: null})
+      this.setState({authed: false})
     }
   }
   componentDidMount(){

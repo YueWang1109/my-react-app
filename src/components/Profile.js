@@ -34,7 +34,7 @@ class Profile extends Component{
     render(){
         //debugger;
         if(this.state.redirect)
-        return <Redirect to="/"/>
+        return <Redirect to="/authfailed"/>
         //console.log(`profile : ${this.props.location.state.authdata} isauthed: ${this.props.location.state.isAuthenticated}`);
         //debugger;
         return (

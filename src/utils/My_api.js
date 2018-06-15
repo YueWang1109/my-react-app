@@ -18,44 +18,77 @@ export {LoginSubmit, register, getInventoryData, setToken,
     }
   }
 
-  function getInventoryData(sort_rule){
-    const url = `${BASE_URL}/api/inventory?sortby=${sort_rule}`;
-    debugger;
+  let getter = (url) => {
     let JWToken =  localStorage.getItem("jwt");
     if(JWToken)
     axios.defaults.headers.common['Authorization'] = JWToken;
-    //axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTUyODE2NzI4NywiZXhwIjoxNTI4MTY5MDg3fQ.g3xNgihfzDH0k0CLgRGb3Go0X04DV_IkFO7RX5hRmYk"
     return axios.get(url).then(
       response => response.data
     ).catch(function (error){
-      if (error) throw error;
+      debugger;
+      if(error.response.status === 401){
+        let RefreshToken =  localStorage.getItem("refreshtoken");
+        let uid =  localStorage.getItem("uid");
+        axios.defaults.headers.common['refreshtoken'] = `${uid} ${RefreshToken}`;
+        return axios.get(`${BASE_URL}/token`).then(response=>{
+          let token = response.data.token;
+          let role = response.data.role;
+          if(token){
+            localStorage.setItem("jwt",token);
+            localStorage.setItem("authed",role);
+            axios.defaults.headers.common['Authorization'] = token;
+            return axios.get(url).then(
+              response => response.data
+            ).catch(function (error){
+              if(error) throw error;
+            })
+          }
+        })
+
+      }else throw error;
     });
+  }
+  let poster = (url,content) => {
+    let JWToken =  localStorage.getItem("jwt");
+    if(JWToken)
+    axios.defaults.headers.common['Authorization'] = JWToken;
+    return axios.post(url,content).then(
+      response => response.data
+    ).catch(function (error){
+      debugger;
+      if(error.response.status === 401){
+        let RefreshToken =  localStorage.getItem("refreshtoken");
+        let uid =  localStorage.getItem("uid");
+        axios.defaults.headers.common['refreshtoken'] = `${uid} ${RefreshToken}`;
+        return axios.get(`${BASE_URL}/token`).then(response=>{
+          let token = response.data.token;
+          let role = response.data.role;
+          if(token){
+            localStorage.setItem("jwt",token);
+            localStorage.setItem("authed",role);
+            axios.defaults.headers.common['Authorization'] = token;
+            return axios.post(url,content).then(
+              response => response.data
+            ).catch(function (error){
+              if(error) throw error;
+            })
+          }
+        })
+
+      }else throw error;
+    });
+  }
+  function getInventoryData(sort_rule){
+    const url = `${BASE_URL}/api/inventory?sortby=${sort_rule}`;
+    return getter(url);
   }
   function getGamebyID(id){
     const url = `${BASE_URL}/api/get_game?id=${id}`;
-    debugger;
-    let JWToken =  localStorage.getItem("jwt");
-    if(JWToken)
-    axios.defaults.headers.common['Authorization'] = JWToken;
-    //axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTUyODE2NzI4NywiZXhwIjoxNTI4MTY5MDg3fQ.g3xNgihfzDH0k0CLgRGb3Go0X04DV_IkFO7RX5hRmYk"
-    return axios.get(url).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return getter(url);
   }
   function deleteGamebyID(id){
     const url = `${BASE_URL}/api/delete_game?id=${id}`;
-    debugger;
-    let JWToken =  localStorage.getItem("jwt");
-    if(JWToken)
-    axios.defaults.headers.common['Authorization'] = JWToken;
-    //axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTUyODE2NzI4NywiZXhwIjoxNTI4MTY5MDg3fQ.g3xNgihfzDH0k0CLgRGb3Go0X04DV_IkFO7RX5hRmYk"
-    return axios.get(url).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return getter(url);
   }
   function LoginSubmit(state) {
     const url = `${BASE_URL}/login`;
@@ -63,12 +96,7 @@ export {LoginSubmit, register, getInventoryData, setToken,
       email: state.email,
       password: state.password
     };
-    console.log(`the input login ${sendObj.email}`);
-    return axios.post(url,sendObj).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return poster(url,sendObj);
   }
   
   function register(state) {
@@ -83,22 +111,10 @@ export {LoginSubmit, register, getInventoryData, setToken,
       city: state.city,
       zipcode: state.zipcode
     }
-    return axios.post(url,sendObj).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return poster(url,sendObj);
   }
   function updateGame(state) {
     const url = `${BASE_URL}/api/edit_game`;
-    // let sendObj = {
-    //   gameid: state.gameid,
-    //   gamename: state.gamename,
-    //   quantity: state.quantity,
-    //   category: state.category,
-    //   description: state.description,
-    //   price: state.price
-    // }
     const formData = new FormData();
     formData.append('idinventory', state.gameid);
     formData.append('ProductName', state.gamename);
@@ -107,24 +123,10 @@ export {LoginSubmit, register, getInventoryData, setToken,
     formData.append('Description', state.description);
     formData.append('Price', state.price);
     formData.append('imagename', state.selectedFile, state.selectedFile.name);
-    let JWToken =  localStorage.getItem("jwt");
-    if(JWToken)
-    axios.defaults.headers.common['Authorization'] = JWToken;
-    return axios.post(url,formData).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return poster(url,formData);
   }
   function addGame(state) {
     const url = `${BASE_URL}/api/add_game`;
-    // let sendObj = {
-    //   gamename: state.gamename,
-    //   quantity: state.quantity,
-    //   category: state.category,
-    //   description: state.description,
-    //   price: state.price
-    // }
     const formData = new FormData();
     formData.append('ProductName', state.gamename);
     formData.append('Quantity', state.quantity);
@@ -132,25 +134,10 @@ export {LoginSubmit, register, getInventoryData, setToken,
     formData.append('Description', state.description);
     formData.append('Price', state.price);
     formData.append('imagename', state.selectedFile, state.selectedFile.name);
-    let JWToken =  localStorage.getItem("jwt");
-    if(JWToken)
-    axios.defaults.headers.common['Authorization'] = JWToken;
-    return axios.post(url,formData).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return poster(url,formData);
   }
   function getUserInfo(){
     const url = `${BASE_URL}/api/my_info?user_info=999`;
 
-    let JWToken =  localStorage.getItem("jwt");
-    if(JWToken)
-    axios.defaults.headers.common['Authorization'] = JWToken;
-    //axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTUyODE2NzI4NywiZXhwIjoxNTI4MTY5MDg3fQ.g3xNgihfzDH0k0CLgRGb3Go0X04DV_IkFO7RX5hRmYk"
-    return axios.get(url).then(
-      response => response.data
-    ).catch(function (error){
-      if (error) throw error;
-    });
+    return getter(url);
   }
