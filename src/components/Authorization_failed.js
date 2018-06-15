@@ -3,6 +3,14 @@ import Mynav from './Nav';
 import { Link } from 'react-router-dom';
 
 class AuthFaild extends Component{
+    constructor(props){
+        super(props)
+        
+        this.resetTheToken();
+    }
+    resetTheToken(){
+        localStorage.clear();
+    }
     render(){
         return (      
             <React.Fragment>
