@@ -1,5 +1,4 @@
 import React ,{ Component } from "react";
-import Mynav from "./Nav";
 import { Redirect } from 'react-router';
 import "../CSS/default.css";
 import { getUserInfo } from '../utils/My_api';
@@ -39,7 +38,6 @@ class Profile extends Component{
         //debugger;
         return (
             <div>
-            <Mynav/>
             <div  className="profile-container">
             <h2 className="profile-header">Profile page!</h2>
             <div className="profile-body">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Mynav from "./Nav";
 import "../CSS/default.css";
 import "../CSS/login.css";
 import { register } from '../utils/My_api';
@@ -74,7 +73,7 @@ class Register extends Component {
             console.log(`login state: ${this.state}`);
                 
         }).catch((error)=>{
-          window.confirm("this email address already registered.");
+          window.confirm("Something wrong happen! You can't register right now.");
         });
         }
       }
@@ -134,7 +133,6 @@ class Register extends Component {
         }
         return (
         <React.Fragment>
-          <Mynav />
           <div className="form-container">
             <h2>Registration</h2>
             <form className="my-form" novalidate>

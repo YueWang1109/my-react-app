@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Nav from "./Nav";
 import { LoginSubmit, setToken } from '../utils/My_api';
 import "../CSS/default.css";
 import "../CSS/login.css";
@@ -51,6 +50,7 @@ class Login extends Component {
       LoginSubmit(this.state).then((data) => {
         //this.setState({isAuthenticated: true});
         if(data&&data.loggedin){
+          debugger;
           console.log(data);
           localStorage.setItem('uid', data.uid);
           localStorage.setItem('authed', data.role);
@@ -72,6 +72,7 @@ class Login extends Component {
           this.setState({
             redirect: true
           });
+          window.confirm("Login success!");
         }
         else{
           this.resetState();
@@ -133,7 +134,6 @@ class Login extends Component {
     else {
       return (
         <React.Fragment>
-        <Nav />
         <div className="form-container">
           <h2>User Login</h2>
           <div className="warning">

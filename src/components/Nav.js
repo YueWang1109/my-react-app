@@ -26,9 +26,9 @@ class Mynav extends Component {
     this.setState({authed:localStorage.getItem('authed')});
   }
   render() {
-    //debugger;
+    debugger;
     return (
-      <Navbar className="my-nav" collapseOnSelect>
+      <Navbar className="my-nav" inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <a href="/">My sample app</a>
@@ -49,7 +49,7 @@ class Mynav extends Component {
               { this.state.authed === "2" ?
                 <NavDropdown eventKey={3} title="manage" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1} href="/inventory">View Products</MenuItem>
-                  <MenuItem eventKey={3.2} href="/addgame">Add new game</MenuItem>
+                  <MenuItem eventKey={3.2} href="/users">View Users</MenuItem>
                   <MenuItem eventKey={3.3}>Something else here</MenuItem>
                   <MenuItem divider />
                   <MenuItem eventKey={3.3}>Separated link</MenuItem>

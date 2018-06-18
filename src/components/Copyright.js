@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Mynav from './Nav';
 
 class Copyright extends Component{
     render(){
         return(
             <div>
-                <Mynav/>
                 <div className="col-sm-6 col-md-12">
                 <div className="panel panel-info">
                   <div className="panel-heading">

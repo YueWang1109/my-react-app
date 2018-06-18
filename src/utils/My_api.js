@@ -4,7 +4,8 @@ const BASE_URL = 'http://localhost:3000';
 // const BASE_URL = 'http://10.10.53.35:3000';
 
 export {LoginSubmit, register, getInventoryData, setToken, 
-  getGamebyID, deleteGamebyID, updateGame, addGame, getUserInfo};
+  getGamebyID, deleteGamebyID, updateGame, addGame, getUserInfo, getUsersData,
+  deleteUserbyID, updateUser, getUserbyID};
   
   function setToken(token){
     debugger;
@@ -82,12 +83,25 @@ export {LoginSubmit, register, getInventoryData, setToken,
     const url = `${BASE_URL}/api/inventory?sortby=${sort_rule}`;
     return getter(url);
   }
+  function getUsersData(sort_rule){
+    debugger;
+    const url = `${BASE_URL}/api/users?sortby=${sort_rule}`;
+    return getter(url);
+  }
   function getGamebyID(id){
     const url = `${BASE_URL}/api/get_game?id=${id}`;
     return getter(url);
   }
+  function getUserbyID(id){
+    const url = `${BASE_URL}/api/get_user?id=${id}`;
+    return getter(url);
+  }
   function deleteGamebyID(id){
     const url = `${BASE_URL}/api/delete_game?id=${id}`;
+    return getter(url);
+  }
+  function deleteUserbyID(id){
+    const url = `${BASE_URL}/api/delete_user?id=${id}`;
     return getter(url);
   }
   function LoginSubmit(state) {
@@ -125,6 +139,22 @@ export {LoginSubmit, register, getInventoryData, setToken,
     formData.append('imagename', state.selectedFile, state.selectedFile.name);
     return poster(url,formData);
   }
+function updateUser(state) {
+  const url = `${BASE_URL}/api/edit_user`;
+  const formData = new FormData();
+  formData.append('iduser', state.uid);
+  formData.append('Firstname', state.firstname);
+  formData.append('Lastname', state.lastname);
+  formData.append('Email', state.email);
+  formData.append('Phone', state.phone);
+  formData.append('Address', state.address);
+  formData.append('City', state.city);
+  formData.append('Zipcode', state.zip);
+  formData.append('role', state.role);
+  delete state.authed;
+  delete state.redirect;
+  return poster(url, state);
+}
   function addGame(state) {
     const url = `${BASE_URL}/api/add_game`;
     const formData = new FormData();

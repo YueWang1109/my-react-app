@@ -1,39 +1,38 @@
 import React, { Component } from 'react';
-import Mynav from './Nav';
-import { getGamebyID } from '../utils/My_api';
-import Gameupdateform from './GameUpdateForm';
+import { getUserbyID } from '../utils/My_api';
+import Userupdatform from './UserUpdateForm';
 import { Redirect } from 'react-router'
 
-class Update extends Component {
+class Gameupdate extends Component {
     constructor(props){
         super(props);
         this.state={
-            game: null,
+            user: null,
             authed: true,
             isLoading: false
         };
     }
 
     componentDidMount(){
-        this.gettheGame();
+        this.gettheUser();
     }
-    gettheGame(){
+    gettheUser(){
         debugger;
         this.setState({ isLoading: true });
         const {id} = this.props.match.params;
         if(id)
-            getGamebyID(id).then((rcvdata) => {
+            getUserbyID(id).then((rcvdata) => {
                 debugger;
                 console.log(JSON.stringify(rcvdata));
                 this.setState({
-                    game: rcvdata,
+                    user: rcvdata,
                     authed: true,
                     isLoading: false
                 })
             }).catch((error) => {
                 debugger;
                 this.setState({
-                    game: null,
+                    user: null,
                     authed: false,
                     isLoading: false
                 })
@@ -45,10 +44,9 @@ class Update extends Component {
         if(!this.state.authed)
             return <Redirect to="/authfailed"/>
         debugger;
-        if(this.state.isLoading||!this.state.game)
+        if(this.state.isLoading||!this.state.user)
             return (
                 <div>
-                    <Mynav/>
                     <div>
                     <p>Loading......</p>
                     </div>
@@ -57,12 +55,11 @@ class Update extends Component {
         return (
         <div>
                 <React.Fragment>
-                    <Mynav/>             
                     {
-                        this.state.game[0]? 
-                        <Gameupdateform game={this.state.game[0]}/>
+                        this.state.user? 
+                        <Userupdatform user={this.state.user}/>
                         :
-                        <h3 className="warning">No such game!</h3>
+                        <h3 className="warning">No such user!</h3>
 
                     }   
                 </React.Fragment>
@@ -71,4 +68,4 @@ class Update extends Component {
 }
 }
 
-export default Update;
+export default Gameupdate;

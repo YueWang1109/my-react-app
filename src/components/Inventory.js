@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { getInventoryData } from '../utils/My_api';
-import Mynav from './Nav';
 import '../CSS/default.css';
 import '../CSS/inventory.css';
 import { Redirect } from 'react-router'
 import GameTag from './game';
 import { deleteGamebyID } from '../utils/My_api';
+import { Link } from 'react-router-dom';
 
 class Inventory extends Component {
     constructor() {
@@ -91,14 +91,12 @@ class Inventory extends Component {
         if(this.state.iserror)
             return (
                 <React.Fragment>
-                    <Mynav  authed={this.state.authed}/>
                     <h3 className="warning">{this.state.errmsg}</h3>
                 </React.Fragment>
             )
         if(this.state.isLoading)
             return (
                 <div>
-                    <Mynav/>
                     <div>
                     <p>Loading......</p>
                     </div>
@@ -107,8 +105,10 @@ class Inventory extends Component {
         const { games } = this.state;
         return (
             <React.Fragment>
-            <Mynav/>
             <div className="dropdown-container">
+                <div className="addgame">
+                    <Link to="/addgame">Add New Game</Link>
+                </div>
                 <div className="sort">Sort By: </div>
                 <div className="selectbox">
                     <select name="sortby" value={this.state.sortby} onChange={this.sorthandle}>

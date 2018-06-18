@@ -20,7 +20,7 @@ class GameTag extends Component {
         // if(this.state.redirect === true){
         //     return <Redirect to="/login"/>
         // }
-        let updateurl = `/update/${this.props.game.idinventory}`
+        let updateurl = `/game_update/${this.props.game.idinventory}`
         // let imgurl = this.props.imgurl;
         let imgurl = `https://localhost:8443/public/${this.props.game.imagename}`;
         let ProductName = this.props.game.ProductName;

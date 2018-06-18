@@ -2,14 +2,21 @@
     width: 100%;
     text-align: right;
 }
+.dropdown-container .addgame{
+    display: inline-block;
+    margin-right: 10px; 
+    font-size: 15px;
+    color: rgb(133, 128, 128);
+    
+}
 .dropdown-container .sort{
     display: inline-block;
+    margin-right: 10px;
 }
 .dropdown-container .selectbox{
     display: inline-block;
 }
 .programContainer {
-    font-family: Impact, Charcoal, sans-serif;
     height: 300px;
     overflow: hidden;
     border-bottom: solid;
