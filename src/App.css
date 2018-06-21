@@ -1,4 +1,13 @@
-
+#root{    
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+}
+body{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
 .navbar{
   margin-bottom: 0;
 }
@@ -24,14 +33,39 @@
   background-color: rgb(37, 153, 76);
 }
 .my-container{
-  min-height: 100rem; 
+  min-height: 100%; 
   font-family: Arial, Helvetica, sans-serif;
   color: #ccc;
 }
+.my-container footer{
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100px;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  height: 20vh;
+}
+.my-container footer div{
+  flex-grow: 1;
+  flex-basis: 200px;
+  margin: 10px 0px 10px 10px;
+  text-align: center;
+}
+.my-container footer i{
+  margin: 10px;
+}
+.social-media{
+  font-size: 2em;
+}
 .container-1{
-  padding-top: 60px;
+  padding: 8vh 0 20vh 0;
 }
 #root{
-  
   background-image: url('./resource/background-default.jpg');
 }

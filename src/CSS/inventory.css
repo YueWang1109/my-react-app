@@ -28,15 +28,18 @@
     
 }
 .program-thumb {
-    width: 200px;
+    width: 300px;
     height: 100%;
     float: left;
+    overflow: hidden;
     /* background: red; */
     /* display: inline-block; */
     /* margin: 20px 20px 20px 0; */
 }
 .program-thumb:hover > img {
-    transform: scale(1.03);
+    /* transform: scale(1.03); */
+    opacity: 0.7;
+    transition-duration: 0.8s;
 }
 .program-thumb .img-container {
     width: 100%;
@@ -44,7 +47,7 @@
 }
 .program-intr {
     float: left;
-    width: calc(100% - 200px);
+    width: calc(100% - 300px);
     /* background: blue; */
     height: 100%;
     padding-left: 50px;

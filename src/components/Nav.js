@@ -27,11 +27,12 @@ class Mynav extends Component {
   }
   render() {
     debugger;
+      let logosrc = 'https://localhost:8443/public/neulion_logo_white.png';
     return (
       <Navbar className="my-nav" inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">My sample app</a>
+            <a href="/" ><img className="logo" src={logosrc} alt="can't load"/></a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -43,10 +44,7 @@ class Mynav extends Component {
             {
               this.state.authed?
               <React.Fragment>
-              <NavItem eventKey={2} href="/inventory">
-                Games
-              </NavItem>
-              { this.state.authed === "2" ?
+              { this.state.authed === "3" ?
                 <NavDropdown eventKey={3} title="manage" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1} href="/inventory">View Products</MenuItem>
                   <MenuItem eventKey={3.2} href="/users">View Users</MenuItem>
@@ -55,7 +53,9 @@ class Mynav extends Component {
                   <MenuItem eventKey={3.3}>Separated link</MenuItem>
                 </NavDropdown>
                 :
-                null
+              <NavItem eventKey={2} href="/inventory">
+                Games
+              </NavItem>
               }
               </React.Fragment>
              
@@ -67,19 +67,19 @@ class Mynav extends Component {
           {this.state.authed?
             <React.Fragment>
             <NavItem eventKey={1} href="/profile">
-            {localStorage.getItem('useremail')}
+            <i class="fas fa-user"></i> {localStorage.getItem('useremail')}
             </NavItem>
             <NavItem eventKey={2} href="/" onClick={this.handleLogout}>
-              Log out
+            <i class="fas fa-sign-out-alt"></i> Log out
             </NavItem>
             </React.Fragment>
             :
             <React.Fragment>
             <NavItem eventKey={1} href="/login">
-              Login
+            <i class="fas fa-user"></i> Sign in
             </NavItem>
             <NavItem eventKey={2} href="/register">
-              Register
+            <i class="far fa-registered"></i> Register
             </NavItem>
             </React.Fragment>
           

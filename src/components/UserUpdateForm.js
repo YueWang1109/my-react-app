@@ -267,6 +267,8 @@ class Userupdatform extends Component {
       </div>
       <button className="btn btn-info defbtn"
       onClick={ this.handleSubmit }>submit</button>
+      <button className="btn btn-secondary defbtn"
+        onClick={ this.handleCancel }>cancel</button>
       </form>
       </div>
     );

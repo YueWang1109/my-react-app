@@ -98,13 +98,16 @@ class Inventory extends Component {
             return (
                 <div>
                     <div>
-                    <p>Loading......</p>
+                    <h2>Loading......</h2>
                     </div>
                 </div>
             )
         const { games } = this.state;
         return (
             <React.Fragment>
+            <p className="page-title">
+                Game List
+            </p>
             <div className="dropdown-container">
                 <div className="addgame">
                     <Link to="/addgame">Add New Game</Link>

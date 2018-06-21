@@ -27,8 +27,13 @@ class UserTag extends Component {
                                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt=""/>
                                         <a href={updateurl} className="user-link">{Firstname} {Lastname}</a>
                                         {
-                                            role === 2?
-                                            <span class="user-subhead">Admin</span>
+                                            role >= 2?
+                                            (
+                                                role === 3?
+                                                <span class="user-subhead">Admin</span>
+                                                :
+                                                <span class="user-subhead">Project Manager</span>
+                                            )
                                             :
                                             <span class="user-subhead">Member</span>
                                         }
@@ -46,37 +51,7 @@ class UserTag extends Component {
                                     </td>
                                 </tr>
         )
-        // let {Firstname, Lastname, Email, Phone, Address, City, Zipcode,role} = this.props.user;
-        // return (
-        //     <div className="userContainer">
-        //         <div className="user-intr">
-        //         <div className="user-left">
-        //             <div className="user-title">{Firstname} {Lastname}</div>
-        //             <div className="user-des">{Email} {Phone} {Address} {City} {Zipcode}</div>
-        //         </div>
-        //         <div className="user-right">
-        //             <div className="user-price">
-        //             {
-        //                 role === 2?
-        //                 <div>Admin</div>
-        //                 :
-        //                 <div>User</div>
-        //             }
-        //             </div>
-        //             {   
-        //                 this.props.usertype === "2"?     //admin!
-        //                 <div className="user-operation">
-        //                 {/* <Link to={null}>update</Link> |   */}
-        //                 <a className="delet-button" onClick={this.deleteUser.bind(this)}>delete</a>
-        //                 </div>
-        //                 :
-        //                 null
-        //             }                   
-        //             </div>
-        //         </div>
-        //     </div>
-            
-        // );
+        
     }
 }
 

@@ -14,6 +14,7 @@ import AuthFaild from './components/Authorization_failed'
 import PrivateRoute  from './utils/PrivateRoute';
 import Users from './components/Users';
 import Nav from "./components/Nav";
+import Gamedetail from "./components/GameDetail";
 
 class Root extends Component {
     
@@ -21,9 +22,9 @@ class Root extends Component {
       debugger;
       let user = localStorage.getItem('authed');
       return (
-        <div className="container my-container">
+        <div className="container my-container container-1">
             <BrowserRouter>
-            <div className="container-1">
+            <React.Fragment>
             <Switch>
                 <Route exact path="/" component={Default}/>
                 <Nav />
@@ -36,15 +37,26 @@ class Root extends Component {
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
                 <PrivateRoute exact path="/inventory" currentUser={user} level="1" component={Inventory}/>
+                <PrivateRoute exact path="/game_detail/:id" currentUser={user} level="1" component={Gamedetail}/>
                 <PrivateRoute exact path="/game_update/:id" currentUser={user} level="2" component={Gameupdate}/>
-                <PrivateRoute exact path="/user_update/:id" currentUser={user} level="2" component={Userupdate}/>
                 <PrivateRoute exact path="/addgame" currentUser={user} level="2" component={AddGame}/>
-                <PrivateRoute exact path="/users" currentUser={user} level="2" component={Users}/>
+                <PrivateRoute exact path="/user_update/:id" currentUser={user} level="3" component={Userupdate}/>
+                <PrivateRoute exact path="/users" currentUser={user} level="3" component={Users}/>
                 <Route component={null}/>
             </Switch>
-            </div>
-
+            </React.Fragment>
             </BrowserRouter>
+            <footer>
+              <div className="contact-info">
+                <div>NeuLion USA.</div>
+                <div>1600 Old Country Road, Plainview, New York</div>
+              </div>
+              <div className="social-media">
+                <i class="fab fa-google-plus-g"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+              </div>
+            </footer>
         </div>
       )
     }

@@ -96,7 +96,7 @@ class Users extends Component {
             return (
                 <div>
                     <div>
-                    <p>Loading......</p>
+                    <h2>Loading......</h2>
                     </div>
                 </div>
             )
@@ -104,8 +104,10 @@ class Users extends Component {
 
         return (
                 <React.Fragment>
-        <div >
             <div className="">
+            <p className="page-title">
+                User List
+            </p>
                 <div className="main-box no-header clearfix">
                     <div className="main-box-body clearfix">
                         <div className="table-responsive">
@@ -122,19 +124,18 @@ class Users extends Component {
                                 </thead>
                                 <tbody>
                                 {
-                    users.map((curuser, curindex) => {
-                        
-                        return <UserTag key={curindex} user={curuser} usertype={this.state.authed} deleteUser={this.deleteUser.bind(this)}/>
-                    }
-                    )
-                }
+                                    users.map((curuser, curindex) => {
+                                        
+                                        return <UserTag key={curindex} user={curuser} usertype={this.state.authed} deleteUser={this.deleteUser.bind(this)}/>
+                                    }
+                                    )
+                                }
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </React.Fragment>
         );
         // return (

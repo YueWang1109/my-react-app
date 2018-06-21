@@ -20,7 +20,8 @@ class GameTag extends Component {
         // if(this.state.redirect === true){
         //     return <Redirect to="/login"/>
         // }
-        let updateurl = `/game_update/${this.props.game.idinventory}`
+        let updateurl = `/game_update/${this.props.game.idinventory}`;
+        let productdetailurl = `/game_detail/${this.props.game.idinventory}`;
         // let imgurl = this.props.imgurl;
         let imgurl = `https://localhost:8443/public/${this.props.game.imagename}`;
         let ProductName = this.props.game.ProductName;
@@ -33,15 +34,15 @@ class GameTag extends Component {
             </div>
             <div className="program-intr">
                 <div className="program-left">
-                    <div className="game-title">{ProductName}</div>
+                    <div className="game-title"><Link to={productdetailurl}>{ProductName}</Link></div>
                     <div className="game-des">{Description}</div>
                     </div>
                 <div className="program-right">
                     <div className="game-price">${Number(Price).toFixed(2)}</div>
                     {   
-                        this.props.usertype === "2"?     //admin!
+                        this.props.usertype >= "2"?     //manager or admin!
                         <div className="game-operation">
-                        <Link to={updateurl}>update</Link> |  
+                        <Link to={updateurl}>edit</Link> |  
                         <a className="delet-button" onClick={this.deleteGame.bind(this)}>delete</a>
                         </div>
                         :
